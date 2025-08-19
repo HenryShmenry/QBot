@@ -1,6 +1,8 @@
 import { Client, GatewayIntentBits, Collection } from "discord.js";
 import { readdirSync } from "fs";
 
+console.log("GatewayIntentBits:", GatewayIntentBits);
+
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
