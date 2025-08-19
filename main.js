@@ -9,6 +9,8 @@ const client = new Client({
     ],
 });
 
+console.log("Intents being used:", client.options.intents.bitfield);
+
 const prefix = "?";
 
 client.commands = new Collection();
