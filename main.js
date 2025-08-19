@@ -13,6 +13,7 @@ const prefix = "?";
 
 client.commands = new Collection();
 
+// Load command files
 const commandFiles = readdirSync("./commands/").filter(file => file.endsWith(".js"));
 
 for (const file of commandFiles) {
@@ -20,14 +21,16 @@ for (const file of commandFiles) {
     client.commands.set(command.name, command);
 }
 
+// Ready event
 client.once("ready", () => {
     console.log('La Bot is online Big Man | Prefix "?"');
 });
 
+// Message handler
 client.on("messageCreate", message => {
     if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-    console.log("Command:", message.content);
+    console.log("Message seen:", message.content);
 
     const args = message.content.slice(prefix.length).trim().split(/ +/);
     const commandName = args.shift().toLowerCase();
@@ -38,7 +41,7 @@ client.on("messageCreate", message => {
     try {
         command.execute(message, args);
     } catch (error) {
-        console.log("Uhh that was weird? Hey Henry, we got another error:")
+        console.log("Uhh that was weird? Hey Henry, we got another error:");
         console.error(error);
         message.reply("Woah there, come back when you have a little more coin!");
     }
