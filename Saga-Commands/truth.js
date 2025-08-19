@@ -1,7 +1,7 @@
-module.exports = {
+export default {
     name: 'truth',
     description: "The Truth command",
-    execute(message, args){
-        message.channel.send('> https://sites.google.com/view/whoistomtv/home\n> https://tvtruthseekers.wordpress.com/');
+    async execute(message, args){
+        await message.channel.send('> https://sites.google.com/view/whoistomtv/home\n> https://tvtruthseekers.wordpress.com/');
     }
 }

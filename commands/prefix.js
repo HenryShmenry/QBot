@@ -1,7 +1,7 @@
-module.exports = {
+export default {
     name: 'prefix',
     description: "A prefix command",
-    execute(message, args){
-        message.channel.send('> The Current Prefix is [ - ]');
+    async execute(message, args){
+        await message.channel.send('> The Current Prefix is [ - ]');
     }
 }

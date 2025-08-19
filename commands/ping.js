@@ -1,7 +1,7 @@
-module.exports = {
+export default {
     name: 'ping',
     description: "A ping command",
-    execute(message, args){
-        message.channel.send('> pong!');
+    async execute(message, args){
+        await message.channel.send('> pong!');
     }
 }

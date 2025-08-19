@@ -1,7 +1,7 @@
-module.exports = {
+export default {
     name: 'lit',
     description: "A lit command",
-    execute(message, args){
-        message.channel.send('> **Lets get it, we lit** - __Travis Scott__ + __Dwayne The Rock Johnson__');
+    async execute(message, args){
+        await message.channel.send('> **Lets get it, we lit** - __Travis Scott__ + __Dwayne The Rock Johnson__');
     }
 }

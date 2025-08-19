@@ -1,7 +1,7 @@
-module.exports = {
+export default {
     name: 'tw',
     description: "link to Twitch Channel",
-    execute(message, args){
-        message.channel.send('> https://www.twitch.tv/predominantpancake');
+    async execute(message, args){
+        await message.channel.send('> https://www.twitch.tv/predominantpancake');
     }
 }

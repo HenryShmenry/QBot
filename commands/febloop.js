@@ -1,7 +1,7 @@
-module.exports = {
+export default {
     name: 'febloop',
     description: "A febloop command",
-    execute(message, args){
-        message.channel.send('> https://www.twitch.tv/febloop5');
+    async execute(message, args){
+        await message.channel.send('> https://www.twitch.tv/febloop5');
     }
 }
