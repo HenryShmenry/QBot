@@ -1,61 +1,47 @@
-import { Client as _Client, Collection } from 'discord.js';
+import { Client, GatewayIntentBits, Collection } from "discord.js";
+import { readdirSync } from "fs";
 
-const Client = new _Client();
-
-const prefix = '?';
--
-Client.once('ready', () => {
-    console.log('La Bot is online Big Man | Prefix " ? "');
+const client = new Client({
+    intents: [
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.MessageContent,
+    ],
 });
 
-import { readdirSync } from 'fs';
+const prefix = "?";
 
-Client.commands = new Collection();
+client.commands = new Collection();
 
-const commandFiles = readdirSync('./commands/').filter(file => file.endsWith('.js'));
-for(const file of commandFiles){
-    const command = require(`./commands/${file}`);
+const commandFiles = readdirSync("./commands/").filter(file => file.endsWith(".js"));
 
-    Client.commands.set(command.name, command)
+for (const file of commandFiles) {
+    const { default: command } = await import(`./commands/${file}`);
+    client.commands.set(command.name, command);
 }
 
-Client.on('message', message =>{
-    if(!message.content.startsWith(prefix) || message.author.bot) return;
-    
-    const args = message.content.slice(prefix.length).split(/ +/);
-    const command = args.shift().toLowerCase();
+client.once("ready", () => {
+    console.log('La Bot is online Big Man | Prefix "?"');
+});
 
-    if(command === 'ping'){
-        Client.commands.get('ping').execute(message, args);
-    } else if (command == 'yt'){
-        Client.commands.get('yt').execute(message, args);
-    } else if (command == 'tw'){
-        Client.commands.get('tw').execute(message, args);
-    } else if (command == 'help'){
-        Client.commands.get('help').execute(message, args);
-    } else if (command == 'kenzie'){
-        Client.commands.get('kenzie').execute(message, args);
-    } else if (command == 'prefix'){
-        Client.commands.get('prefix').execute(message, args);
-    } else if (command == 'dr-rc'){
-        Client.commands.get('dr-rc').execute(message, args);
-    } else if (command == 'natty'){
-        Client.commands.get('natty').execute(message, args);
-    } else if (command == 'tomtv'){
-        Client.commands.get('tomtv').execute(message, args);
-    } else if (command == 'saga'){
-        Client.commands.get('saga').execute(message, args);
-    } else if (command == 'febloop'){
-        Client.commands.get('febloop').execute(message, args);
-    } else if (command == 'skull'){
-        Client.commands.get('skull').execute(message, args);
-    } else if (command == 'lit'){
-        Client.commands.get('lit').execute(message, args);
-    } else if (command == 'mars'){
-        Client.commands.get('mars').execute(message, args);
-    } else if (command == 'chuchis'){
-        Client.commands.get('chuchis').execute(message, args);
+client.on("messageCreate", message => {
+    if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+    console.log("Command:", message.content);
+
+    const args = message.content.slice(prefix.length).trim().split(/ +/);
+    const commandName = args.shift().toLowerCase();
+
+    const command = client.commands.get(commandName);
+    if (!command) return;
+
+    try {
+        command.execute(message, args);
+    } catch (error) {
+        console.log("Uhh that was weird? Hey Henry, we got another error:")
+        console.error(error);
+        message.reply("Woah there, come back when you have a little more coin!");
     }
-})
+});
 
-Client.login('ODYwNjAwMzA1MDUzMDczNDU5.YN9mfQ.6ua7bgn2UiDd5uhv61TK1g8EZkQ');
+client.login("ODYwNjAwMzA1MDUzMDczNDU5.YN9mfQ.6ua7bgn2UiDd5uhv61TK1g8EZkQ");
