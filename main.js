@@ -9,13 +9,12 @@ const client = new Client({
     ],
 });
 
-console.log("Intents being used:", client.options.intents.bitfield);
+client.login("ODYwNjAwMzA1MDUzMDczNDU5.YN9mfQ.6ua7bgn2UiDd5uhv61TK1g8EZkQ");
 
 const prefix = "?";
 
 client.commands = new Collection();
 
-// Load command files
 const commandFiles = readdirSync("./commands/").filter(file => file.endsWith(".js"));
 
 for (const file of commandFiles) {
@@ -23,12 +22,10 @@ for (const file of commandFiles) {
     client.commands.set(command.name, command);
 }
 
-// Ready event
 client.once("ready", () => {
     console.log('La Bot is online Big Man | Prefix "?"');
 });
 
-// Message handler
 client.on("messageCreate", message => {
     if (!message.content.startsWith(prefix) || message.author.bot) return;
 
@@ -48,5 +45,3 @@ client.on("messageCreate", message => {
         message.reply("Woah there, come back when you have a little more coin!");
     }
 });
-
-client.login("ODYwNjAwMzA1MDUzMDczNDU5.YN9mfQ.6ua7bgn2UiDd5uhv61TK1g8EZkQ");
