@@ -49,7 +49,7 @@ try {
 }
 
 /* This is the section of code that handles the commands in the commands folder */
-client.on("messageCreate", message => {
+client.on("messageCreate", async message => {
     if (message.author.bot) return;
 
     const content = message.content.toLowerCase();
@@ -61,7 +61,7 @@ client.on("messageCreate", message => {
                     'Deleting message from ${message.author.tag} (contained blacklisted word: "${word}")'
                 );
                 await message.delete();
-                await message.reply('You cant say that');
+                await message.channel.send('${message.author}, you cant say that!');
             } catch (err) {
                 console.error("Failed to delete message:", err);
             }
