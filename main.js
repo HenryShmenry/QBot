@@ -12,6 +12,7 @@ const client = new Client({
     ],
 });
 
+/* DO NOT ADD THE ACTUAL KEY TO THE ONLINE REPO!! */
 client.login("LOGIN_KEY");
 
 const prefix = "?";
