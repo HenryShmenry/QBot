@@ -58,10 +58,10 @@ client.on("messageCreate", async message => {
         if (content.includes(word)){
             try {
                 console.log(
-                    'Deleting message from ${message.author.tag} (contained blacklisted word: "${word}")'
+                    `Deleting message from ${message.author.tag} (contained blacklisted word: "${word}")`
                 );
                 await message.delete();
-                await message.channel.send('${message.author}, you cant say that!');
+                await message.channel.send(`${message.author}, you cant say that!`);
             } catch (err) {
                 console.error("Failed to delete message:", err);
             }
@@ -88,5 +88,3 @@ client.on("messageCreate", async message => {
         message.reply("Woah there, come back when you have a little more coin!");
     }
 });
-
-/* This is the section of code that handles the removal of innapropriate messages */
