@@ -2,3 +2,7 @@ node_modules/
 blacklist.txt
 Keys.txt
 AnnouncedUploads.json
+config.js
+package.json
+package-lock.json
+(OLD)main.js
