@@ -13,15 +13,14 @@ const client = new Client({
   ],
 });
 
-/* DO NOT ADD THE ACTUAL KEY TO THE ONLINE REPO!! */
-
+// The Discord Bot login Key: DO NOT SHARE/COPY/DELETE
 client.login("LOGIN_KEY");
 
+// The command prefix that goes before any commands.
 const prefix = "?";
 client.commands = new Collection();
 
-const Logs = await client.channels.fetch("LOGS_CHANNEL_KEY");
-
+// The location of any command scripts in the bot folder:
 const commandFiles = readdirSync("./commands/").filter(file => file.endsWith(".js"));
 
 /* Set each file in the commands folder to be a default command that the bot can use */
@@ -30,12 +29,36 @@ for (const file of commandFiles) {
   client.commands.set(command.name, command);
 }
 
-client.once("ready", () => {
+let Logs;
+// let Tom;
+
+// Message in the terminal to let you know when the bot has been activated:
+client.once("ready", async () => {
   console.log('La Bot is online Big Man | Prefix "?"');
+  try {
+    // The ID for the logs channel on your discord sever.
+    Logs = await client.channels.fetch("LOGS_CHANNEL_ID");
+    if (Logs?.isTextBased()) {
+      await Logs.send(`The bot is online | Prefix: ?`);
+    } else {
+      console.warn("Logs channel is not text-based.");
+    }
+  } catch (err) {
+    console.error("Failed to fetch Logs channel:", err);
+  }
+
+  // Potential Tom Irritant:
+  //try {
+  //  Tom = await client.channels.fetch("SPAM_CHANNEL_ID");
+  //  while (Tom?.isTextBased()) {
+  //    await Tom.send(`<@TOM_USER_ID>`);
+  //  }
+  //} catch (err) {
+  //  console.error("Couldn't piss off Tom:", err);
+  //}
 });
 
 // Load blacklist.txt into a Set for fast lookups
-
 const blacklistPath = path.join(process.cwd(), "blacklist.txt");
 let blacklist = new Set();
 
@@ -62,9 +85,8 @@ client.on("messageCreate", async message => {
   for (let word of blacklist) {
     if (content.includes(word)) {
       try {
-        console.log(
-          `Deleting message from ${message.author.tag} (contained blacklisted word: "${word}")`
-        );
+        console.log(`Deleting message from ${message.author.tag} (contained blacklisted word: "${word}")`);
+        await Logs.send(`Deleted message from ${message.author} for containing the word "${word}"`);
         await message.delete();
         await message.channel.send(`${message.author}, you cant say that!`);
       } catch (err) {
@@ -77,7 +99,8 @@ client.on("messageCreate", async message => {
   /* If the message doesn't start with the prefix, ignore */
   if (!content.startsWith(prefix)) return;
   /* Otherwise, log that a message has been recognised and which command it is */
-  console.log("Command seen:", message.content);
+  await Logs.send(`Command: ${message.content} | User: ${message.author.tag}`);
+  console.log("Command:", message.content, `| User: ${message.author.tag}`);
 
   const args = message.content.slice(prefix.length).trim().split(/ +/);
   const commandName = args.shift().toLowerCase();
@@ -121,7 +144,7 @@ async function checkYouTube() {
 
   try {
     const res = await fetch(
-      `https://www.youtube.com/feeds/videos.xml?channel_id=UCS23wq8siBHnBnOepVP9gig`
+      `https://www.youtube.com/feeds/videos.xml?channel_id=${YOUTUBE_CHANNEL_ID}`
     );
     const xml = await res.text();
 
@@ -131,7 +154,7 @@ async function checkYouTube() {
 
     console.log(`[YouTube] Found ${ids.length} videos in feed.`);
 
-    const channel = await client.channels.fetch("ANNOUNCEMENTS_KEY");
+    const channel = await client.channels.fetch("ANNOUNCEMENTS_CHANNEL_ID");
 
     let newVideos = 0;
 
@@ -148,6 +171,7 @@ async function checkYouTube() {
         if (channel?.isTextBased()) {
           await channel.send(`Check out this upload: ${videoUrl}`);
           console.log(`[YouTube] Announced video: ${title}`);
+          await Logs.send(`[YouTube] Announced video: ${title}`);
         }
 
         newVideos++;
@@ -165,8 +189,8 @@ async function checkYouTube() {
   }
 }
 
+// Check YouTube for a new video every 5 minutes
 client.once("ready", () => {
-  // Loop start
-  setInterval(checkYouTube, 5 * 60 * 1000); // every 5 minutes
+  setInterval(checkYouTube, 5 * 60 * 1000);
   checkYouTube();
 });
