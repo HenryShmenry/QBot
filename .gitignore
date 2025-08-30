@@ -5,4 +5,8 @@ AnnouncedUploads.json
 config.js
 package.json
 package-lock.json
+<<<<<<< HEAD
 (OLD)main.js
+=======
+(OLD)main.js
+>>>>>>> 9413eafb58e8b9aa78dc74ff99ef2e01ead7ffdd
