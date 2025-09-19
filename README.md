@@ -49,7 +49,7 @@ I am considering setting up multiple bots for different tasks perhaps?
 - [x] Add YouTube upload announcement function and keep track of announcements made to prevent duplicates.
 - [ ] Updated the Bot format to be modular to make future updates simpler.
 - [ ] Add Twitch Stream Start Announcement function.
-- [ ] Add a role to allow members to choose to recieve a ping from each announcement (separate for uploads / streams).
+- [x] Add a role to allow members to choose to recieve a ping from each announcement (separate for uploads / streams).
 - [ ] Update all the commands: adding / removing relevant channels.
 - [ ] Update all commands from message to embedded format.
 - [ ] Email announcement functionality? (May not be neccessary)
