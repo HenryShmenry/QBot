@@ -33,6 +33,7 @@ export default async function youtubeChecker(client, config) {
 
       const ids = [...xml.matchAll(/<yt:videoId>(.*?)<\/yt:videoId>/g)].map(m => m[1]);
       const titles = [...xml.matchAll(/<title>(.*?)<\/title>/g)].map(m => m[1]);
+      const descriptions = [...xml.matchAll(/<media:description>([\s\S]*?)<\/media:description>/g)].map(m => m[1]);
 
       console.log(`[YouTube] Found ${ids.length} videos in feed`);
 
@@ -52,13 +53,23 @@ export default async function youtubeChecker(client, config) {
 
           // The Announce it
           const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
+          if (description == "") {
+            if (channel?.isTextBased()) {
+            await channel.send(`<@&${config.roles.yts_ping}> Check out this short: ${videoUrl}`);
+            console.log(`[YouTube] Announced short: ${title}`);
+            if (Logs?.isTextBased()) {
+              await Logs.send(`[YouTube] Announced short: ${title}`);
+            }
+          }
+        } else {
           if (channel?.isTextBased()) {
-            await channel.send(`<@&${config.roles.yt_ping}> Check out this upload: ${videoUrl}`);
+            await channel.send(`<@&${config.roles.yt_ping}> Check out this video: ${videoUrl}`);
             console.log(`[YouTube] Announced video: ${title}`);
             if (Logs?.isTextBased()) {
               await Logs.send(`[YouTube] Announced video: ${title}`);
             }
           }
+        }
           newVideos++;
         }
       }
