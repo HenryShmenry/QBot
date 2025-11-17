@@ -10,7 +10,8 @@ A bot that I used for an official YouTube channel. The aims for this bot will be
 2. Using the YouTube RSS Feed, the bot is able to check for any new videos every 5 minutes. If a new video is found, it will make an announcement about the video in the relevant channel, then adding the Id of that specific video to an AnnouncedUploads.json file, which is used as a reference to prevent duplicate announcements. Finally logging this action in a separate channel on the server and in the command line.
 3. Using a prefix "?" the bot has a set list of commands that send messages into the same channel that a command is executed. These commands are all text based and largly consist of links to other YouTube channels or other basic call and request functions. After any function is used, the action and response are logged in a separate channel on the server and in the command line.
 4. Once the bot is activated or runs into an error, errors are logged in the command line whereas actions and activation messages are logged both in the command line and in a separate channel on the server.
-5.  [EXTRA] as an extra function, the bot is equipped with a while(TRUE) loop that pings Tom in a specific channel indefinitely. This goes on until the bot is turned off, or the code removed. 
+5. Any videos that are announced to the discord are separated into YouTube Videos and YouTube Shorts, attaching any new uploads to separate discord roles allowing members of the server to be pinged when a certain video is announced. 
+6.  [EXTRA] as an extra function, the bot is equipped with a while(TRUE) loop that pings Tom in a specific channel indefinitely. This goes on until the bot is turned off, or the code removed. 
 
 ### Current Commands:
 - help -> Provides a list of commands
