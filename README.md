@@ -51,6 +51,7 @@ I am considering setting up multiple bots for different tasks perhaps?
 - [x] Updated the Bot format to be modular to make future updates simpler.
 - [ ] Add Twitch Stream Start Announcement function.
 - [x] Add a role to allow members to choose to recieve a ping from each announcement (separate for uploads / streams).
+- [x] Allowed the bot to differentiate between Videos and YT-Shorts.
 - [ ] Update all the commands: adding / removing relevant channels.
 - [ ] Update all commands from message to embedded format.
 - [ ] Email announcement functionality? (May not be neccessary)
