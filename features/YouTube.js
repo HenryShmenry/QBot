@@ -53,7 +53,7 @@ export default async function youtubeChecker(client, config) {
           // The Announce it
           const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
           if (channel?.isTextBased()) {
-            await channel.send(`Check out this upload: ${videoUrl}`);
+            await channel.send(`<@&${config.roles.yt_ping}> Check out this upload: ${videoUrl}`);
             console.log(`[YouTube] Announced video: ${title}`);
             if (Logs?.isTextBased()) {
               await Logs.send(`[YouTube] Announced video: ${title}`);
