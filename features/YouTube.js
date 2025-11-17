@@ -44,6 +44,7 @@ export default async function youtubeChecker(client, config) {
       for (let i = ids.length - 1; i >= 0; i--) {
         const videoId = ids[i];
         const title = titles[i + 1]; // titles[0] = channel name
+        const description = descriptions[i] 
 
         // If a video is not in the "seen videos"
         if (!seenVideos.has(videoId)) {
