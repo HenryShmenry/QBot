@@ -32,8 +32,8 @@ export default async function youtubeChecker(client, config) {
       const xml = await res.text();
 
       const ids = [...xml.matchAll(/<yt:videoId>(.*?)<\/yt:videoId>/g)].map(m => m[1]);
-      const titles = [...xml.matchAll(/<title>(.*?)<\/title>/g)].map(m => m[1]);
-      const descriptions = [...xml.matchAll(/<media:description>([\s\S]*?)<\/media:description>/g)].map(m => m[1]);
+      const titles = [...xml.matchAll(/<title>(.*?)<\/title>/g)].map(m => m[1]);     
+      const links = [...xml.matchAll(/<link rel="alternate" href="([^"]+)"/g)].map(m => m[1]);
 
       console.log(`[YouTube] Found ${ids.length} videos in feed`);
 
@@ -44,7 +44,7 @@ export default async function youtubeChecker(client, config) {
       for (let i = ids.length - 1; i >= 0; i--) {
         const videoId = ids[i];
         const title = titles[i + 1]; // titles[0] = channel name
-        const description = descriptions[i] 
+        const link = links[i + 1]; // links[0] = channel link
 
         // If a video is not in the "seen videos"
         if (!seenVideos.has(videoId)) {
@@ -54,7 +54,7 @@ export default async function youtubeChecker(client, config) {
 
           // The Announce it
           const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
-          if (description == "") {
+          if (link.includes("/shorts/")) {
             if (channel?.isTextBased()) {
             await channel.send(`<@&${config.roles.yts_ping}> Check out this short: ${videoUrl}`);
             console.log(`[YouTube] Announced short: ${title}`);
