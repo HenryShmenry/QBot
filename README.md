@@ -14,21 +14,20 @@ A bot that I used for an official YouTube channel. The aims for this bot will be
 6.  [EXTRA] as an extra function, the bot is equipped with a while(TRUE) loop that pings Tom in a specific channel indefinitely. This goes on until the bot is turned off, or the code removed. 
 
 ### Current Commands:
-- help -> Provides a list of commands
-- dr-rc -> Provides a link to DR-RC's YouTube and Discord Server
-- chuchis -> Provides a link to ChuChis on Twitch
-- febloop -> Provides a link to Febloop5 on Twitch and YouTube
-- kenzie -> Provides a link to Kenzie's YouTube and Discord Server
-- lit -> Responds with message "Yeah we lit"
-- mars -> Provides a link to Mars's YouTube and SoundCloud Page
-- natty -> Provides a link to Natty's YouTube and Discord Server
-- ping -> Responds with "Pong"
-- prefix -> Responds with the current active prefix "?"
-- saga -> Provides a link to the SAGA YouTube Channel
-- skull -> Provides a link to TheDeadSkull's YouTube Channel
-- tomtv -> Provides a link to TomTV's YouTube and Discord Server
-- tw -> Links to the PredominantPancake Twitch Channel
-- yt -> Links to the Questionable YouTube Channel
+
+| Command | Description |
+| :---: | ---: |
+| `help` | Provides this list of commands |
+| `prefix` | Returns the current active prefix *?* |
+| `Channel_name` | Returns the available socials for a given channel |
+| `tw` | Links to the [PredominantPancake Twitch Channel](https://www.twitch.tv/predominantpancake/about) |
+| `yt` | Links to the [Questionable YouTube Channel](https://www.youtube.com/@questionable420) |
+| `lit` | Responds with message *Yeah we lit* |
+| `ping` | Responds with *Pong* |
+
+List of connected channels: `dr-rc`, `chuchis`, `febloop`, `kenzie`, `mars`, `natty`, `saga`, `skull` and `tomtv`.
+
+Common socials returned: Discord Server, YouTube Channel, Twitch Channel, Soundcloud.
 
 > [!TIP]
 > Start with the ?help command, as each other command is listed within.  
